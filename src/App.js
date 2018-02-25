@@ -8,12 +8,25 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 class App extends Component {
+
+  handleSearchChange(e) {
+    console.log(e.target.value);
+    this.setState({
+      term: e.target.value
+    });
+  }
+
   render() {
+    const term = this.state ? this.state.term : '';
     return (
       <BrowserRouter>
         <div>
-          <Layout>
-            <Route exact path='/' component={Home}/>
+          <Layout handleSearchChange={this.handleSearchChange.bind(this)}>
+            <Route 
+              term={this.state ? this.state.term : ''} 
+              exact 
+              path='/' 
+              render={props=><Home {...props} term={term} />}/>
           </Layout>
         </div>
       </BrowserRouter>

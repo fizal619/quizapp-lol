@@ -9,4 +9,3 @@ Please use [yarn](https://yarnpkg.com/lang/en/docs/install/) to make sure our pa
 - `git clone`
 - `yarn`
 - `yarn start`
-

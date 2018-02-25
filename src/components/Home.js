@@ -14,6 +14,7 @@ const api = 'https://wt-89cfc50bad1f3bc752f0a463b2877bb0-0.run.webtask.io/sheets
 export default class Home extends Component {
 
   async componentDidMount(){
+    //will remove this once we start working on simple auth.
     const sheet = await fetch(api+'?user=test').then(r=>r.json());
     this.setState({sheet})
   }

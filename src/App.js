@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase, { auth, provider } from './firebase.js';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/Home';
@@ -7,7 +8,43 @@ import logo from './logo.svg';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
+
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      user: null,
+      term: ''
+    }
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } 
+    });
+  }
+
+  login() {
+    auth.signInWithPopup(provider) 
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+    }
+
+  logout() {
+    auth.signOut()
+    .then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  }
 
   handleSearchChange(e) {
     console.log(e.target.value);
@@ -21,9 +58,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Layout handleSearchChange={this.handleSearchChange.bind(this)}>
+          <Layout 
+            user={this.state.user}            
+            login={this.login.bind(this)}
+            logout={this.logout.bind(this)}
+            handleSearchChange={this.handleSearchChange.bind(this)}>
             <Route 
-              term={this.state ? this.state.term : ''} 
+              term={this.state.term} 
               exact 
               path='/' 
               render={props=><Home {...props} term={term} />}/>

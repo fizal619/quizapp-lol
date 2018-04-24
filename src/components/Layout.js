@@ -6,18 +6,14 @@ class Layout extends Component {
   render() {
     const activeItem = this.props.children.props.path;
     console.log('Layout Props', this.props);
-    const { handleSearchChange, login, logout, user, children } = this.props;
+    const { login, logout, user, children } = this.props;
 
     return (
       <div>
 
         <Menu pointing>
           <Menu.Item name='home' active={activeItem === '/'} onClick={this.handleItemClick} />
-          <Menu.Item name='leaderboard' active={activeItem === '/leaderboard'} onClick={this.handleItemClick} />
           <Menu.Menu position='right'>
-            <Menu.Item>
-              <Input icon='search' placeholder='Search...' onChange={handleSearchChange} />
-            </Menu.Item>
               {user ? 
                 <Menu.Item>
                   <Image src={user.photoURL} size="mini" />

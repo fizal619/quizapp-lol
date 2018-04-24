@@ -13,9 +13,8 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      user: null,
-      term: ''
+    this.state={
+      user: null
     }
   }
 
@@ -61,10 +60,8 @@ class App extends Component {
           <Layout 
             user={this.state.user}            
             login={this.login.bind(this)}
-            logout={this.logout.bind(this)}
-            handleSearchChange={this.handleSearchChange.bind(this)}>
-            <Route 
-              term={this.state.term} 
+            logout={this.logout.bind(this)}>
+            <Route  
               exact 
               path='/' 
               render={props=><Home {...props} term={term} />}/>

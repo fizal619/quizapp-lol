@@ -1,7 +1,7 @@
 {
-  "name": "co_grader",
-  "version": "0.1.0",
-  "private": true,
+  "name": "boilerplate",
+  "version": "0.0.0",
+  "private": false,
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

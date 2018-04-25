@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from './firebase.js';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import {connect} from 'react-firebase';
 import Layout from './components/Layout';
 import Home from './components/Home';
-
 import logo from './logo.svg';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
@@ -53,7 +53,9 @@ class App extends Component {
   }
 
   render() {
-    const term = this.state ? this.state.term : '';
+
+    console.log('APP Props', this.props);
+
     return (
       <BrowserRouter>
         <div>
@@ -64,7 +66,7 @@ class App extends Component {
             <Route  
               exact 
               path='/' 
-              render={props=><Home {...props} term={term} />}/>
+              render={props=><Home {...props} />}/>
           </Layout>
         </div>
       </BrowserRouter>
@@ -72,4 +74,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapFirebaseToProps = (props, ref) => ({
+  test: 'test'
+});
+
+export default connect(mapFirebaseToProps)(App)
+
